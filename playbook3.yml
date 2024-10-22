@@ -1,0 +1,14 @@
+---
+- name: Install git and clonethe git repositories
+  hosts: all
+  tasks:
+    - name: install git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+    - name: clone the repo
+      git:
+        repo: https://github.com/intelliqittrainings/maven.git
+        dest: /tmp/gitnew      
+...

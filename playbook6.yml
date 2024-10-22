@@ -1,0 +1,38 @@
+---
+- name: configuring tomcat10
+  hosts: all
+  tasks:
+    - name: install tomcat10
+      apt:
+        name: tomcat10
+        state: present
+        update_cache: yes
+    - name: install tomcat10 admin
+      apt:
+        name: tomcat10-admin
+        state: present
+    - name: copy tomcat users file
+      copy:
+        src: tomcat-users.xml
+        dest: /etc/tomcat10
+    - name: change the port
+      replace:
+        regexp: 8080
+        replace: 9090
+        path: /etc/tomcat10/server.xml
+    - name: restart the service
+      service:
+         name: tomcat10
+         state: restarted
+    - name: pause for 40 seconds
+      pause:
+         seconds: 40      
+    - name: check the url
+      uri:
+         url: http://172.31.35.161
+         status_code: 200
+    - name: check the url 
+      uri:
+         url: http://172.31.47.36
+         status_code: 200
+...           

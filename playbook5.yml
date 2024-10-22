@@ -1,0 +1,27 @@
+---
+- name: install apache
+  hosts: all
+  tasks:
+    - name: install apache
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+    - name: edit the tomcat users
+      copy:
+        content: "Welcome to Bangalore"
+        dest: /var/www/html/index.html
+    - name: restart the service
+      service:
+        name: apache2
+        state: restarted
+    - name: check the url
+      uri:
+        url: http://172.31.47.36
+        status_code: 200
+    - name: check the url1
+      uri:
+        url: http://172.31.35.161
+        status_code: 200
+...          
+              
