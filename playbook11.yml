@@ -1,0 +1,10 @@
+---
+- name: Implementing Host scope variables
+  hosts: webserver
+  tasks:
+    - name: install maven
+      apt:
+        name: "{{a}}"
+        state: "{{b}}"
+        update_cache: "{{c}}"
+...          
