@@ -1,0 +1,21 @@
+---
+- name: Implement tags
+  hosts: all
+  tasks:
+    - name: Install s/w
+      apt:
+        name: tree
+        state: present
+        update_cache: yes
+      tags: tree_install
+    - name: Create a user
+      user:
+        name: siva
+        password: siva
+      tags: user_create
+    - name: copy password
+      copy:
+        src: /etc/passwd
+        dest: /tmp
+...          
+
