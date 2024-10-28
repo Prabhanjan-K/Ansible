@@ -1,0 +1,6 @@
+---
+- name: edit the files
+  copy:
+    content: "Hai"
+    dest: /var/www/html/index.html
+...      

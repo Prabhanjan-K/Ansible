@@ -1,0 +1,13 @@
+---
+- name: Change premissions on the file is an empty file
+  hosts: all
+  tasks:
+    - name: capture file Info
+      stat:
+        path: /tmp/newfile
+      register: Result
+    - name: Display the info
+      debug:
+        var: Result
+...         
+          
