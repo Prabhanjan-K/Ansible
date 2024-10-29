@@ -1,0 +1,23 @@
+---
+- name: create jenkins container linkwith qa and prod server
+  hosts: all
+  tasks:
+    - name: create jenkins server
+      docker_container:
+        name: myjenkins
+        image: jenkins/jenkins
+        ports:
+          - 5050:8080
+    - name: create qa server
+      docker_container:
+        name: "{{item.a}}"
+        image: tomcat
+        ports:
+          - "{{item.b}}"
+        links:
+          - myjenkins:jenkins
+      with_items:
+          - {a: qaserver,b: 6060:8080}
+          - {a: prodeserver,b: 7070:8080}    
+
+...
